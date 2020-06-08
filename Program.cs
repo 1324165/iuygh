@@ -4,37 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _1._1._4_X_MAS_TREE_
+namespace _1._1._10._2D_ARRAY
 {
     class Program
     {
+        static void printArray(int[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); ++i)
+            {
+                for (int j = 0; j < array.GetLength(1); ++j)
+                {
+                    Console.Write("{0}, ", array[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
         static void Main(string[] args)
         {
-            uint N;
-            Console.WriteLine("Enter N:");
-            string input = Console.ReadLine();
-            bool result = uint.TryParse(input, out N);
-            if (result)
-            { }
-            else
-            {
-                Console.WriteLine("Invalid value entered");
-            }
-            string str = "*";
-            for (int k = 1; k <= N; ++k)
-            {
-                for (int i = 1; i <= k; ++i)
+            int[,] array = new int[5, 5];
+            Random random = new Random();
+            for (int i = 0; i < array.GetLength(0); ++i)
+                for (int j = 0; j < array.GetLength(1); ++j)
                 {
-                    for (int j = 1; j <= N - i; ++j)
-                    {
-                        Console.Write(" ");
-                    }
-                    Console.Write(str);
-                    str = str + "**";
-                    Console.WriteLine();
+                    array[i, j] = random.Next(0, 100);
                 }
-                str = "*";
-            }
+            Console.WriteLine("initial array:");
+            printArray(array);
+            int sum = 0;
+            for (int i = 0; i < array.GetLength(0); ++i)
+                for (int j = 0; j < array.GetLength(1); ++j)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
+                        sum += array[i, j];
+                    }
+                }
+            Console.WriteLine(sum);
             Console.ReadLine();
         }
     }
